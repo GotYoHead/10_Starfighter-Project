@@ -21,4 +21,8 @@ public class Explosion extends Alien {
 			System.out.println(" NO Explosion PICTURE");
 		}
 	}
+	public void expand()
+	{
+		
+	}
 }

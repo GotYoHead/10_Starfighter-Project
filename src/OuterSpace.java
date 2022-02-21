@@ -32,6 +32,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private BufferedImage back;
 	private static HeartsHorde hearts;
 	private BufferedImage lose;
+	private Explosion boom;
 
 	/* Task 8: uncomment once you are ready for this part
 	 * You might want to talk to me before you start this section, you really have to use your brain here.
@@ -73,6 +74,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		// You also need to make them move
 		horde = new AlienHorde(hSize);
 		sHorde = new superAlienHorde(0);
+		boom = new Explosion(300,300,50,50);
 
 
 		// You likely no longer need your alienOne or alienTwo but if you comment these out you need to make sure that you comment out the code that goes with it
@@ -148,6 +150,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		// call alien.move()
 
 		horde.drawEmAll(graphToBack);
+		
+		boom.draw(graphToBack);
 
 		horde.moveEmAll();
 
