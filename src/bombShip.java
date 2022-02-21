@@ -15,11 +15,12 @@ public class bombShip extends Alien {
 		
 		try
 		{
-			URL url = getClass().getResource("bombShip.jpg");
+			URL url = getClass().getResource("bombship.png");
 			image = ImageIO.read(url);
 		}
 		catch(Exception e)
 		{
+			System.out.println(e.getMessage());
 			//feel free to do something here
 		}
 		bomb = new Bomb(getX() + getWidth()/2,getY()+getHeight()/2,20,20,3);
@@ -27,10 +28,15 @@ public class bombShip extends Alien {
 
 	public void move(String direction){
 		if (direction.equals("RIGHT")){
+			setX(getX()+1);
 			if(getX() > StarFighter.WIDTH){
 				setX(0);
 			}
 		}
+	}
+
+	public void draw(Graphics w){
+		w.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
 	}
 
 

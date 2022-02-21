@@ -155,6 +155,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 
 		bs.move("RIGHT");
+		bs.draw(graphToBack);
 		bs.shoot(graphToBack);
 		
 		hearts.drawEmAll(graphToBack);

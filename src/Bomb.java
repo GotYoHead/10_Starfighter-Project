@@ -33,7 +33,7 @@ public class Bomb extends MovingThing {
 		}
 		catch(Exception e)
 		{
-			
+			System.out.println(e.getMessage());
 		}
 	}
 
