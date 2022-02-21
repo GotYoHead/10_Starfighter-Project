@@ -24,6 +24,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private Alien alienOne;
 	private Alien alienTwo;
 	private superAlien sa;
+	private bombShip bs;
 	private static superAlienHorde sHorde;
 	private Ammo a;
 	private int level = 1;
@@ -74,7 +75,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		// You also need to make them move
 		horde = new AlienHorde(hSize);
 		sHorde = new superAlienHorde(0);
-		boom = new Explosion(300,300,50,50);
+		bs = new bombShip(25, 25, 50);
 
 
 		// You likely no longer need your alienOne or alienTwo but if you comment these out you need to make sure that you comment out the code that goes with it
@@ -137,10 +138,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			shots.add(a);
 			keys[4] = false; // This is to help with the animation and doesn't need to be changed
 		}
-		
-		
-		
-
 
 		// TASK 3: add code to draw Ship
 
@@ -151,11 +148,14 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		horde.drawEmAll(graphToBack);
 		
-		boom.draw(graphToBack);
 
 		horde.moveEmAll();
 
 		horde.removeDeadOnes(shots.getList());
+
+
+		bs.move("RIGHT");
+		bs.shoot(graphToBack);
 		
 		hearts.drawEmAll(graphToBack);
 		
@@ -184,13 +184,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//		a.draw(graphToBack);
 		//		a.move("UP");
 		
-		
-		
-	
-		
-		
-	
-
 		for(int i = 0; i < horde.getList().size(); i++)
 		{
 			if(ship.beenhit(horde.getList().get(i), horde.getList().get(i).getWidth()))

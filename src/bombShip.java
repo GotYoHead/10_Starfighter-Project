@@ -22,11 +22,22 @@ public class bombShip extends Alien {
 		{
 			//feel free to do something here
 		}
+		bomb = new Bomb(getX() + getWidth()/2,getY()+getHeight()/2,20,20,3);
 	}
-	
+
+	public void move(String direction){
+		if (direction.equals("RIGHT")){
+			if(getX() > StarFighter.WIDTH){
+				setX(0);
+			}
+		}
+	}
+
+
 	public void shoot(Graphics w)
 	{
-		if(bomb.getY()>StarFighter.HEIGHT)
+		long lastExplo = bomb.getLastExplosion();
+		if(lastExplo != 0 && System.currentTimeMillis()-lastExplo > 2000)
 			bomb = new Bomb(getX() + getWidth()/2,getY()+getHeight()/2,20,20,3);
 		bomb.draw(w);
 		bomb.move("DOWN");
