@@ -81,33 +81,33 @@ public abstract class MovingThing implements Moveable
 	{
 		return height;
 	}
-	
+
 	// Did I collide with another MovingThing? Eric Cui
-		// if(alien.beenHit(ship, ship.getWidth())
-		public boolean beenhit(MovingThing thing, int distance) {
+	// if(alien.beenHit(ship, ship.getWidth())
+	public boolean beenhit(MovingThing thing, int distance) {
 
-			int x = thing.getX();
-			int y = thing.getY();
+		int x = thing.getX();
+		int y = thing.getY();
 
-			int w = thing.getWidth();
-			int h = thing.getHeight();
+		int w = thing.getWidth();
+		int h = thing.getHeight();
 
-			double thisx = getX() + getWidth()/2;
-			double thisy = getY() + getHeight()/2;
+		double thisx = getX() + getWidth()/2;
+		double thisy = getY() + getHeight()/2;
 
-			x += w/2; // Shift to the middle rather than top left
-			y += h/2;
+		x += w/2; // Shift to the middle rather than top left
+		y += h/2;
 
-			// Distance Formula
-			double magnitude = Math.pow((Math.pow(thisx - x, 2)) + (Math.pow(thisy - y, 2)), 0.5);
+		// Distance Formula
+		double magnitude = Math.pow((Math.pow(thisx - x, 2)) + (Math.pow(thisy - y, 2)), 0.5);
 
-			if(magnitude < distance) {	
-				return true;
-			}
-
-			return false;
-
+		if(magnitude < distance) {	
+			return true;
 		}
+
+		return false;
+
+	}
 
 
 

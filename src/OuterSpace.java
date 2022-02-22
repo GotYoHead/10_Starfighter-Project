@@ -45,7 +45,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	public OuterSpace()
 	{
-		
+
 		try
 		{
 			URL url = getClass().getResource("background.jpeg");
@@ -55,7 +55,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			//feel free to do something here
 		}
-		
+
 		setBackground(Color.black);
 
 		keys = new boolean[5];
@@ -64,7 +64,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		ship = new Ship();
 		// Task 5: Instantiate Two Aliens
 		hearts = new HeartsHorde(5);
-		
+
 		// Task 6: Instantiate your Ammo
 		// The Ammo should originate in the middle of the ship,
 		// so try to make one with a speed of 0 till you get a good location 
@@ -77,7 +77,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			e.printStackTrace();
 		}
-		
+
 		a = new Ammo();
 
 		shots = new Bullets();
@@ -104,15 +104,15 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	}
 
 	public void update(Graphics window)
-	
+
 	{
 		paint(window);
 	}
 
 	public void paint( Graphics window )
 	{
-		
-	
+
+
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
@@ -129,7 +129,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("StarFighter ", 25, 50 );
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
-		
+
 		graphToBack.drawImage(background,0,0,getFocusCycleRootAncestor());
 
 
@@ -163,7 +163,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		// call alien.move()
 
 		horde.drawEmAll(graphToBack);
-		
+
 
 		horde.moveEmAll();
 
@@ -173,14 +173,14 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		bs.move("RIGHT");
 		bs.draw(graphToBack);
 		bs.shoot(graphToBack);
-		
+
 		if(bs.getBomb().getY()>(StarFighter.HEIGHT/4)*3)
 		{
 			bs.getBomb().explode();
 		}
 
 		hearts.drawEmAll(graphToBack);
-		
+
 		sHorde.drawEmAll(graphToBack);
 		sHorde.moveEmAll();
 		sHorde.removeDeadOnes(shots.getList());
@@ -195,43 +195,43 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			sHorde.add(new superAlien((int)(Math.random()*StarFighter.WIDTH),(int)(Math.random()*50),3));
 
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
 		for (superAlien sa : sHorde.getList())
 			sa.shoot(graphToBack);
 
-		
-		
+
+
 		twoDGraph.setColor(Color.yellow);
 
 		//		a.draw(graphToBack);
 		//		a.move("UP");
-		
+
 		for(int i = 0; i < horde.getList().size(); i++)
 		{
 			if(ship.beenhit(horde.getList().get(i), horde.getList().get(i).getWidth()))
-				{
-					hearts.removeHeart();
-					horde.getList().remove(i);
-					break;
-				}
+			{
+				hearts.removeHeart();
+				horde.getList().remove(i);
+				break;
+			}
 		}
-		
-		
-		
+
+
+
 		for(int i = 0; i < shots.getList().size(); i++)
 		{
 			if(ship.beenhit(shots.getList().get(i), shots.getList().get(i).getWidth()))
-				{
-					hearts.removeHeart();
-					shots.getList().remove(i);
-					break; 
-				}
+			{
+				hearts.removeHeart();
+				shots.getList().remove(i);
+				break; 
+			}
 		}
-		
+
 		for(int i = 0; i < sHorde.getList().size(); i++)
 		{
 			if(ship.beenhit(sHorde.getList().get(i).getA(), sHorde.getList().get(i).getA().getWidth()))
@@ -241,14 +241,17 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 				break;
 			}
 		}
-		
-//		if(ship.beenhit(bs.getBomb().getExplosion(), bs.getBomb().getExplosion().getWidth()))
-//		{
-//			bs.getBomb().getExplosion().setHeight(-80);
-//			hearts.removeHeart();
-//
-//		}
-		
+
+		if(bs.getBomb().getExplosion() != null)
+		{
+			if(ship.beenhit(bs.getBomb().getExplosion(), bs.getBomb().getExplosion().getWidth()))
+			{
+				bs.getBomb().getExplosion().setHeight(-80);
+				hearts.removeHeart();
+
+			}
+		}
+
 
 		// TASK 7: Check if AlienOne has been Shot by your Ammo (look for a method in Alien)
 		// If Shot Print Boom (Just for your testing)
@@ -259,7 +262,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 
 		twoDGraph.drawImage(back, null, 0, 0);
-		
+
 		if(hearts.getList().size() <= 0)
 		{
 			twoDGraph.drawImage(lose,null,0,0);
