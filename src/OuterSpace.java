@@ -242,12 +242,12 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			}
 		}
 		
-		if(ship.beenhit(bs.getBomb().getExplosion(), bs.getBomb().getExplosion().getWidth()))
-		{
-			bs.getBomb().getExplosion().setHeight(-80);
-			hearts.removeHeart();
-
-		}
+//		if(ship.beenhit(bs.getBomb().getExplosion(), bs.getBomb().getExplosion().getWidth()))
+//		{
+//			bs.getBomb().getExplosion().setHeight(-80);
+//			hearts.removeHeart();
+//
+//		}
 		
 
 		// TASK 7: Check if AlienOne has been Shot by your Ammo (look for a method in Alien)
