@@ -112,6 +112,19 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
+		if(hearts.getList().size() <= 0)
+		{
+			ship.setPos(-900, -900);
+			twoDGraph.drawImage(lose,null,0,0);
+			return;
+		}
+		if(level == 6)
+		{
+			ship.setPos(-900, -900);
+			twoDGraph.drawImage(win,null,0,0);
+			return;
+		}
+
 		//take a snap shop of the current screen and same it as an image
 		//that is the exact same width and height as the current screen
 		if(back==null)
@@ -151,7 +164,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			
 			if(canShotgun)
 			{
-				Ammo a2 = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3);
+				Ammo a2 = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3, 10);
 				shots.add(a2);
 			}
 			keys[4] = false; // This is to help with the animation and doesn't need to be changed
@@ -271,16 +284,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		twoDGraph.drawImage(back, null, 0, 0);
 
-		if(hearts.getList().size() <= 0)
-		{
-			ship.setPos(-900, -900);
-			twoDGraph.drawImage(lose,null,0,0);
-		}
-		if(level == 6)
-		{
-			ship.setPos(-900, -900);
-			twoDGraph.drawImage(win,null,0,0);
-		}
 		twoDGraph.setColor(Color.WHITE);
 		twoDGraph.drawString("Level: " + level, StarFighter.WIDTH-50,50);
 	}

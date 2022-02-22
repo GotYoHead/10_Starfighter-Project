@@ -45,6 +45,15 @@ public class Ammo extends MovingThing
 		super(x,y,w,h);
 		speed = s;
 		sidewaysSpeed = sH;
+		try
+		{
+			URL url = getClass().getResource("laser.png");
+			image = ImageIO.read(url);
+		}
+		catch(Exception e)
+		{
+
+		}
 	}
 
 	public void setSpeed(int s)
