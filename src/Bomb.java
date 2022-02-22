@@ -71,6 +71,11 @@ public class Bomb extends MovingThing {
 		setX(-getWidth()-1);
 		setY(-getHeight()-1);
 	}
+	
+	public Explosion getExplosion()
+	{
+		return explosion;
+	}
 
 
 	public void move( String direction )

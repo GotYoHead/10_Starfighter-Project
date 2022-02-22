@@ -24,8 +24,13 @@ public class Explosion extends MovingThing {
 	}
 
 	public void expand() {
+		if(getHeight() < 80)
+		{
+		setX(getX()-5);
 		setWidth(getWidth()+10);
+		setY(getY()-5);
 		setHeight(getHeight()+10);
+		}
 	}
 
 	@Override
