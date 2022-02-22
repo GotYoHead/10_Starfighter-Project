@@ -12,7 +12,7 @@ public class bombShip extends Alien {
 	public bombShip(int x, int y, int s)
 	{
 		super(x, y, 50,50,s);
-		
+
 		try
 		{
 			URL url = getClass().getResource("bombship.png");
@@ -27,12 +27,18 @@ public class bombShip extends Alien {
 	}
 
 	public void move(String direction){
-		if (direction.equals("RIGHT")){
+		if (direction.equals("RIGHT"))
+		{
 			setX(getX()+1);
-			if(getX() > StarFighter.WIDTH){
-				setX(0);
+			if(getX() > StarFighter.WIDTH)
+			{
+				setX(-getWidth());
 			}
 		}
+	}
+	public Bomb getBomb()
+	{
+		return bomb;
 	}
 
 	public void draw(Graphics w){

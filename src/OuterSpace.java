@@ -34,6 +34,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private static HeartsHorde hearts;
 	private BufferedImage lose;
 	private Explosion boom;
+	private BufferedImage background;
 
 	/* Task 8: uncomment once you are ready for this part
 	 * You might want to talk to me before you start this section, you really have to use your brain here.
@@ -44,6 +45,17 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	public OuterSpace()
 	{
+		
+		try
+		{
+			URL url = getClass().getResource("background.jpeg");
+			background = ImageIO.read(url);
+		}
+		catch(Exception e)
+		{
+			//feel free to do something here
+		}
+		
 		setBackground(Color.black);
 
 		keys = new boolean[5];
@@ -99,6 +111,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	public void paint( Graphics window )
 	{
+		
+	
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D twoDGraph = (Graphics2D)window;
 
@@ -115,6 +129,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.drawString("StarFighter ", 25, 50 );
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
+		
+		graphToBack.drawImage(background,0,0,getFocusCycleRootAncestor());
 
 
 		// Task 3: Add Keys to make the ship move, must use Capital Letters
@@ -158,6 +174,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		bs.draw(graphToBack);
 		bs.shoot(graphToBack);
 		
+		if(bs.getBomb().getY()>(StarFighter.HEIGHT/4)*3)
+		{
+			bs.getBomb().explode();
+		}
+		
 		hearts.drawEmAll(graphToBack);
 		
 		sHorde.drawEmAll(graphToBack);
@@ -174,6 +195,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			sHorde.add(new superAlien((int)(Math.random()*StarFighter.WIDTH),(int)(Math.random()*50),3));
 
 		}
+		
+		
+		
+		
 		
 		for (superAlien sa : sHorde.getList())
 			sa.shoot(graphToBack);

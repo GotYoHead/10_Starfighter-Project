@@ -9,7 +9,7 @@ public class Bomb extends MovingThing {
 	private Image image;
 	private Explosion explosion;
 	private Boolean hasExploded = false;
-	private long last_explosion = 0;
+	private long lastExplosion = 0;
 
 	public Bomb()
 	{
@@ -37,9 +37,13 @@ public class Bomb extends MovingThing {
 		}
 	}
 
-	public long getLastExplosion(){ return last_explosion; }
+	public long getLastExplosion(){
+		return lastExplosion; 
+		}
 
-	public Boolean getExplode(){ return hasExploded; }
+	public Boolean getExplode(){ 
+		return hasExploded; 
+		}
 
 	public void setSpeed(int s)
 	{
@@ -58,7 +62,7 @@ public class Bomb extends MovingThing {
 
 	public void explode(){
 		speed = 0;
-		last_explosion = System.currentTimeMillis();
+		lastExplosion = System.currentTimeMillis();
 		hasExploded = true;
 		explosion = new Explosion(getX(),getY(),getWidth(),getHeight());
 		setX(StarFighter.WIDTH+getWidth()+1);
@@ -71,7 +75,7 @@ public class Bomb extends MovingThing {
 		//add code to move the ammo UP or DOWN
 		//	if(direction.equals("______"))
 		//		Call setX/Y like we have done before
-		if(getY() < (StarFighter.HEIGHT/4)*3){
+		if(getY() > (StarFighter.HEIGHT/4)*3){
 			explode();
 		}
 		if(direction.equals("UP"))
