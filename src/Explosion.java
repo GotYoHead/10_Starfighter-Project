@@ -31,7 +31,7 @@ public class Explosion extends MovingThing {
 	@Override
 	public void move(String direction) {}
 	@Override
-	public void draw(Graphics window) { }
+	public void draw(Graphics window) { window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null); }
 	@Override
 	public void setSpeed(int s) { }
 	@Override

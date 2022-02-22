@@ -178,7 +178,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			bs.getBomb().explode();
 		}
-		
+
 		hearts.drawEmAll(graphToBack);
 		
 		sHorde.drawEmAll(graphToBack);

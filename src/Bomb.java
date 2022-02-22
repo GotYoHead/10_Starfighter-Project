@@ -57,7 +57,10 @@ public class Bomb extends MovingThing {
 
 	public void draw( Graphics window )
 	{
-		window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
+		if(hasExploded)
+			explosion.draw(window);
+		else
+			window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
 	}
 
 	public void explode(){
@@ -65,8 +68,8 @@ public class Bomb extends MovingThing {
 		lastExplosion = System.currentTimeMillis();
 		hasExploded = true;
 		explosion = new Explosion(getX(),getY(),getWidth(),getHeight());
-		setX(StarFighter.WIDTH+getWidth()+1);
-		setY(StarFighter.HEIGHT+getHeight()+1);
+		setX(-getWidth()-1);
+		setY(-getHeight()-1);
 	}
 
 
@@ -75,7 +78,11 @@ public class Bomb extends MovingThing {
 		//add code to move the ammo UP or DOWN
 		//	if(direction.equals("______"))
 		//		Call setX/Y like we have done before
+		if(hasExploded){
+			explosion.expand();
+		}
 		if(getY() > (StarFighter.HEIGHT/4)*3){
+			System.out.println(getY());
 			explode();
 		}
 		if(direction.equals("UP"))
