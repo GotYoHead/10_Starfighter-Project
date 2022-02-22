@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 public class Ammo extends MovingThing
 {
 	private int speed;
+	private int sidewaysSpeed;
 	private Image image;
 
 	public Ammo()
@@ -39,6 +40,12 @@ public class Ammo extends MovingThing
 			
 		}
 	}
+	public Ammo(int x, int y, int w, int h, int s, int sH)
+	{
+		super(x,y,w,h);
+		speed = s;
+		sidewaysSpeed = sH;
+	}
 
 	public void setSpeed(int s)
 	{
@@ -64,6 +71,7 @@ public class Ammo extends MovingThing
 		if(direction.equals("UP"))
 		{
 			setY(getY()-speed);
+			setX(getX() + sidewaysSpeed);
 		}
 		if(direction.equals("DOWN"))
 		{

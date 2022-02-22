@@ -31,6 +31,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private BufferedImage lose;
 	private BufferedImage background;
 	private BufferedImage win;
+	boolean canShotgun = false;
 	int level = 1;
 
 	/* Task 8: uncomment once you are ready for this part
@@ -147,12 +148,20 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			a = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3);
 			shots.add(a);
+			
+			if(canShotgun)
+			{
+				Ammo a2 = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3);
+				shots.add(a2);
+			}
 			keys[4] = false; // This is to help with the animation and doesn't need to be changed
 		}
+		
+	
 
 		// TASK 3: add code to draw Ship
 
-		
+	
 		
 		ship.draw(graphToBack);  // Anything can be drawn like with this same technique
 
@@ -178,8 +187,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		hearts.drawEmAll(graphToBack);
 		
-		twoDGraph.setColor(Color.WHITE);
-		twoDGraph.drawString("Level: " + level, StarFighter.WIDTH-50,50);
 
 		sHorde.drawEmAll(graphToBack);
 		sHorde.moveEmAll();
@@ -196,10 +203,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			sHorde.add(new superAlien((int)(Math.random()*StarFighter.WIDTH),(int)(Math.random()*50),3));
 			horde.speedEmUp();
 		}
-
-
 		
-		
+		if(level == 1)
+			canShotgun = true;
+
 
 		for (superAlien sa : sHorde.getList())
 			sa.shoot(graphToBack);
@@ -274,6 +281,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			ship.setPos(-900, -900);
 			twoDGraph.drawImage(win,null,0,0);
 		}
+		twoDGraph.setColor(Color.WHITE);
+		twoDGraph.drawString("Level: " + level, StarFighter.WIDTH-50,50);
 	}
 
 	public static boolean levelUp()
@@ -306,6 +315,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			keys[4] = true;
 		}
+
 		repaint();
 	}
 
@@ -331,6 +341,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			keys[4] = false;
 		}
+
 		repaint();
 	}
 
