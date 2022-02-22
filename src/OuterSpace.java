@@ -164,8 +164,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			
 			if(canShotgun)
 			{
-				Ammo a2 = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3, 10);
+				Ammo a2 = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3,1);
 				shots.add(a2);
+				Ammo a3 = new Ammo(ship.getX()+(ship.getWidth()/2),ship.getY() + 10,5,5,3,-1);
+				shots.add(a3);
 			}
 			keys[4] = false; // This is to help with the animation and doesn't need to be changed
 		}
@@ -217,7 +219,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			horde.speedEmUp();
 		}
 		
-		if(level == 1)
+		if(level == 4)
 			canShotgun = true;
 
 
