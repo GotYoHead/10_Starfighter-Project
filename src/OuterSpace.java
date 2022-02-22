@@ -21,20 +21,17 @@ import javax.imageio.ImageIO;
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
 	private Ship ship;
-	private Alien alienOne;
-	private Alien alienTwo;
-	private superAlien sa;
 	private bombShip bs;
 	private static superAlienHorde sHorde;
 	private Ammo a;
-	private int level = 1;
 	private int hSize = 10;
 	private boolean[] keys;
 	private BufferedImage back;
 	private static HeartsHorde hearts;
 	private BufferedImage lose;
-	private Explosion boom;
 	private BufferedImage background;
+	private BufferedImage win;
+	int level = 1;
 
 	/* Task 8: uncomment once you are ready for this part
 	 * You might want to talk to me before you start this section, you really have to use your brain here.
@@ -50,6 +47,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			URL url = getClass().getResource("background.jpeg");
 			background = ImageIO.read(url);
+			URL u = getClass().getResource("wasted.jpeg");
+			lose = ImageIO.read(u);
+			URL u2 = getClass().getResource("win.jpeg");
+			win = ImageIO.read(u2);
+
 		}
 		catch(Exception e)
 		{
@@ -70,14 +72,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		// so try to make one with a speed of 0 till you get a good location 
 		// This will make the game always start by firing a bullet, we will fix that later.
 
-		try {
-			URL u = getClass().getResource("wasted.jpeg");
-			lose = ImageIO.read(u);
-		} catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
+		
 		a = new Ammo();
 
 		shots = new Bullets();
@@ -157,6 +152,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		// TASK 3: add code to draw Ship
 
+		
+		
 		ship.draw(graphToBack);  // Anything can be drawn like with this same technique
 
 		// TASK 5: add code to draw Alien
@@ -180,6 +177,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		}
 
 		hearts.drawEmAll(graphToBack);
+		
+		twoDGraph.setColor(Color.WHITE);
+		twoDGraph.drawString("Level: " + level, StarFighter.WIDTH-50,50);
 
 		sHorde.drawEmAll(graphToBack);
 		sHorde.moveEmAll();
@@ -190,15 +190,16 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		if(levelUp())
 		{
+			level += 1;
 			hSize += 5;
 			horde = new AlienHorde(hSize);
 			sHorde.add(new superAlien((int)(Math.random()*StarFighter.WIDTH),(int)(Math.random()*50),3));
-
+			horde.speedEmUp();
 		}
 
 
-
-
+		
+		
 
 		for (superAlien sa : sHorde.getList())
 			sa.shoot(graphToBack);
@@ -246,7 +247,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		{
 			if(ship.beenhit(bs.getBomb().getExplosion(), bs.getBomb().getExplosion().getWidth()))
 			{
-				bs.getBomb().getExplosion().setHeight(-80);
+				bs.getBomb().getExplosion().setY(-500);
 				hearts.removeHeart();
 
 			}
@@ -265,7 +266,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		if(hearts.getList().size() <= 0)
 		{
+			ship.setPos(-900, -900);
 			twoDGraph.drawImage(lose,null,0,0);
+		}
+		if(level == 6)
+		{
+			ship.setPos(-900, -900);
+			twoDGraph.drawImage(win,null,0,0);
 		}
 	}
 

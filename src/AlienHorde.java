@@ -90,6 +90,13 @@ public class AlienHorde
 		}
 	}
 	
+	public void speedEmUp()
+	{
+		for(Alien a : aliens)
+		{
+			a.setSpeed(a.getSpeed()+1);
+		}
+	}
 	
 
 	public String toString()
